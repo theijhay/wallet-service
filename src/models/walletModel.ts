@@ -11,7 +11,7 @@ export const getWalletBalance = async (userId: string): Promise<number> => {
     .where({ id: userId })
     .first();
   
-  return result ? result.walletBalance : 0;
+  return result ? parseFloat(result.walletBalance) : 0;
 };
 
 /**
@@ -20,8 +20,8 @@ export const getWalletBalance = async (userId: string): Promise<number> => {
  * @param amount - Amount to add to or subtract from the balance.
  * @returns {Promise<number>} - Number of rows affected.
  */
-export const updateWalletBalance = async (userId: string, amount: number) => {
-  return await knex('users')
+export const updateWalletBalance = async (userId: string, amount: number): Promise<void> => {
+  await knex('users')
     .where({ id: userId })
     .update({
       walletBalance: knex.raw('walletBalance + ?', [amount]),

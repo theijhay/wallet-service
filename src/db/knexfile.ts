@@ -10,11 +10,11 @@ const config: Knex.Config = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: 12392,
-    ssl: { rejectUnauthorized: true },  // Enable SSL if required by the provider
+    port: Number(process.env.DB_PORT) || 3306,
+    ssl: { rejectUnauthorized: false }, // Ensure SSL settings if required
   },
   migrations: {
-    directory: './src/db/migrations',
+    directory: './migrations',
   },
 };
 
