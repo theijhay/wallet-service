@@ -17,7 +17,7 @@ export const registerUser = async (name: string, phoneNumber: string, address: s
 
   const allowed = await checkBlacklist(email);  // Check with email as identifier
   if (!allowed) {
-    throw new Error('User is blacklisted and cannot be onboarded.');
+    throw { status: 400, message: 'User is blacklisted and cannot be onboarded.' };
   }
 
   const user = {

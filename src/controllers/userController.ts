@@ -6,6 +6,13 @@ export const registerUser = async (req: Request, res: Response) => {
   try {
     const { name, phoneNumber, address, email, password } = req.body;
 
+    if (!name || !phoneNumber || !address || !email || !password) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'validation error: All fields are required',
+      });
+    }
+
     // Call the registerUser service
     const { user, token } = await registerUserService(name, phoneNumber, address, email, password);
 
@@ -59,11 +66,16 @@ export const loginUser = async (req: Request, res: Response) => {
       }
     });
   } catch (error) {
-    // Check if error is an instance of Error to safely access error.message
-    const message = error instanceof Error ? error.message : 'An unknown error occurred';
+    let status = 400;
+    let message = error instanceof Error ? error.message : 'An unknown error occurred';
 
-    // Handle errors gracefully and return a formatted error response
-    res.status(400).json({
+    if (message === 'User not found') {
+      status = 404;
+    } else if (message === 'Incorrect password') {
+      status = 401;
+    }
+
+    res.status(status).json({
       status: 'error',
       message
     });

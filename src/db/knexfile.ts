@@ -1,5 +1,6 @@
 import { Knex } from 'knex';
 import * as dotenv from 'dotenv';
+import path from 'path';
 
 dotenv.config();
 
@@ -14,7 +15,7 @@ const config: Knex.Config = {
     ssl: { rejectUnauthorized: false }, // Ensure SSL settings if required
   },
   migrations: {
-    directory: './migrations',
+    directory: path.join(__dirname, '/migrations'),
   },
 };
 
