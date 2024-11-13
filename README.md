@@ -6,7 +6,7 @@ This Wallet Service provides a set of APIs to manage user wallets, including cre
 ## E-R Diagram
 - The E-R diagram below represents the database schema used in this project. It shows the relationships between users, wallets, and transactions.
 
-[Database ER Diagram](https://dbdesigner.page.link/eGEW7KHB6Aepequh9)
+[Database ER Diagram](https://imgur.com/a/lj6ULUl)
 
 ## Technologies Used
 - `Node.js`: JavaScript runtime for building the server.
